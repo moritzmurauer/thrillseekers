@@ -22,9 +22,9 @@
             </div>
             <div>
               <div v-if="!toggleDropdown" @click="toggleDropdown = true">
-                <div v-if="userInfo" class="avatar-nav">
-                  <div v-if="userInfo.avatarUrl">
-                    <img class="avatar mr-1" :src="userInfo.avatarUrl">
+                <div v-if="user" class="avatar-nav">
+                  <div v-if="user">
+                    <i class="fas fa-folder-minus"></i>
                   </div>
                   <div v-else>
                     <img class="avatar mr-1" src="@/assets/default.png">
@@ -33,9 +33,9 @@
               </div>
 
                <div v-if="toggleDropdown" @click="toggleDropdown = false">
-                <div v-if="userInfo" class="avatar-nav ">
-                  <div v-if="userInfo.avatarUrl">
-                    <img class="avatar active-dropdown mr-1" :src="userInfo.avatarUrl">
+                <div v-if="user" class="avatar-nav ">
+                  <div v-if="user">
+                    <i class="fas fa-folder-minus"></i>
                   </div>
                   <div v-else>
                     <img class="avatar active-dropdown mr-1" src="@/assets/default.png">
@@ -44,6 +44,10 @@
               </div>
 
               </div>
+          </div>
+
+          <div>
+            
           </div>
 
           <div class="dropdown-menu" v-if="toggleDropdown">
@@ -68,8 +72,10 @@
 
         </div>
 
-        <router-link v-if="!user" :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
-        <router-link v-if="!user" :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+      <div v-if="!user">
+        <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+        <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+      </div>
       </div>
     </nav>
   </div>
@@ -92,12 +98,8 @@
       const {
         logout
       } = useLogout()
-      const {
-        user
-      } = getUser()
-      const {
-        document: userInfo
-      } = getDocument('users', user.value.uid)
+      const { user } = "" || getUser()
+      const { document: userInfo } = getDocument('users', user.uid) || getDocument('users', user.uid)
       const toggleDropdown = ref(false)
 
 

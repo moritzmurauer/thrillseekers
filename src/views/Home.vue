@@ -93,7 +93,7 @@
  
  
 
-
+<Footer />
 </template>
 
 <script>
@@ -103,6 +103,7 @@ import PostsHome from '../components/Home/PostsHome.vue'
 import Categories from '../components/Categories.vue'
 import Footer from '../components/Footer.vue'
 import getLimitedCollection from '../composables/getLimitedCollection'
+import getOrderedCollection from '@/composables/getOrderedCollection'
 import getUser from '../composables/getUser'
 
 export default {
@@ -116,7 +117,7 @@ export default {
     )
 
     const {user} = getUser()
-    const {error: userError, documents: userDocs} = getLimitedCollection('users', 6)
+    const {error: userError, documents: userDocs} = getOrderedCollection(6)
 
         // 
    // <UsersHome :users="userDocs" />

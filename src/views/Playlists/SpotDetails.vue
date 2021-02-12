@@ -32,7 +32,19 @@
 
       <div>
         <div class="likes">
-          <p class="secondary"><i class="far fa-heart"></i> 0</p>
+          <div  class="secondary d-flex">
+
+            <div class="pr-1">{{playlist.likes.length}}</div>
+            <div v-if="user">
+                 <!-- Like -->
+                <i v-if="!playlist.likes.includes(user.uid)" @click="handleLikes" class="far fa-heart"></i>
+
+                <!-- unlike -->
+                <i v-if="playlist.likes.includes(user.uid)" @click="handleLikes" class="fas fa-heart secondary"></i> 
+            </div>
+
+            
+            </div>
         </div>
       </div>
     </div>
@@ -104,6 +116,7 @@
      <PostsHome :posts="spotsLimited" />
 
     </div>
+    
   </div>
 </template>
 
@@ -113,6 +126,7 @@
   import useDocument from '@/composables/useDocument'
   import getDocument from '@/composables/getDocument'
   import getUser from '@/composables/getUser'
+  import Footer from '@/components/Footer.vue'
   import CommentSingle from '@/components/CommentSingle.vue'
   import AddComment from '@/components/AddComment.vue'
   import {computed,ref} from 'vue'
@@ -126,7 +140,8 @@
       AddComment,
       Gmap,
       CommentSingle,
-      PostsHome
+      PostsHome,
+      Footer
     },
 
     setup(props) {
@@ -136,26 +151,38 @@
       )
 
       const router = useRouter()
-      const {document: playlist,error} = 
+      let {document: playlist,error} = 
         getDocument('playlists', props.id)
 
       const {user} = getUser()
 
 
-      const {updateDoc: spotCounter } = useDocument('users', user.value.uid)
-      const {document: userInfo} = getDocument('users', user.value.uid)
+      const {updateDoc: spotCounter } = useDocument('users', user.uid)
+      const {document: userInfo} = getDocument('users', user.uid)
       const {deleteDoc, updateDoc} = useDocument('playlists', props.id)
-
       const {deleteImage} = useStorage()
 
       const googleUrl = 'https://www.google.com/maps/search/?api=1&query='
 
-      
 
-
-
-
-
+      const handleLikes = async () => {
+        console.log(playlist.value);
+        const userLiked = playlist.value.likes.includes(user.value.uid)
+        if (!userLiked) {
+          const newLike = user.value.uid
+          await updateDoc({
+          likes: [...playlist.value.likes, newLike]
+         })
+        } else {
+            const likedIndex = playlist.value.likes.indexOf(user.value.uid)
+            const likes = playlist.value.likes
+            const newLikes = likes.splice(likedIndex, 1)
+            await updateDoc({
+            likes
+         })
+        }  
+         playlist = getDocument('playlists', props.id).document    
+      }
 
 
       const handleDelete = async () => {
@@ -202,7 +229,8 @@
         user,
         spotUrl,
         spotsLimited,
-        userInfo
+        userInfo,
+        handleLikes
       }
 
 
@@ -244,6 +272,10 @@
     border-radius: 8px;
     transition: ease-in 250ms;
     text-align: center;
+    cursor: pointer;
+  }
+
+  .fa-heart {
     cursor: pointer;
   }
 

@@ -2,22 +2,15 @@ import { ref, watchEffect } from 'vue';
 import { projectFirestore } from '../firebase/config';
 
 
-const getOrderedCollection = (collection, orderBy, limit) => {
+const getOrderedCollection = (limit) => {
 
     const documents = ref(null)
     const error = ref(null)
 
 
     
-    let collectionRef = projectFirestore.collection(collection)
-
-    collectionRef.orderBy(orderBy).limit(limit)
-
-   
-
-    
-
-
+    let collectionRef = projectFirestore.collection("users")
+    .orderBy("addedSpots", "desc").limit(limit)
 
 
   const unsub = collectionRef.onSnapshot((snap) => {

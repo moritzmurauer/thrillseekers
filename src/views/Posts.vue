@@ -17,6 +17,8 @@
         loading...
       </div>
     </div>
+
+    <Footer />
  
   
 </template>
@@ -26,11 +28,12 @@
 import SelectCategory from '@/components/SelectCategory.vue'
 import ListView from '../components/ListView.vue'
 import getCollection from '../composables/getCollection'
+import Footer from '@/components/Footer.vue'
 import { computed, ref } from 'vue'
 
 export default {
   name: 'Home',
-  components: { ListView, SelectCategory },
+  components: { ListView, SelectCategory, Footer },
 
   setup() {
     const search = ref("")

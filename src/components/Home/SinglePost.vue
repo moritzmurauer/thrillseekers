@@ -32,7 +32,7 @@
 
                 <small>added by <br> <router-link :to="{ name: 'UserProfile', params: {id: post.userId}}"> {{post.userName}} </router-link></small>
               </div>
-                <p class="secondary"><i class="far fa-heart"></i> {{post.songs.length}}</p>
+                <p class="secondary"><i class="far fa-heart"></i> {{post.likes.length}}</p>
                 
             </div>
         </div>
