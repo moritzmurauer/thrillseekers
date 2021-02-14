@@ -15,7 +15,7 @@
             
         <div class="d-flex">
           <div class="counter">
-            <h2 class="pr-1">{{++index}}</h2>
+            <h2 class="pr-3">{{++index}}</h2>
           </div>
           <div class="pr-1 " v-if="topList">
             
