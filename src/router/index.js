@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Contributors from '../views/Contributors.vue'
 import Posts from '../views/Posts.vue'
+import Topspots from '../views/Topspots.vue'
 import Login from '../views/auth/Login.vue'
 import Signup from '../views/auth/Signup.vue'
 import CreateSpot from '../views/Playlists/CreateSpot.vue'
@@ -30,6 +31,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+    {
+    path: '/topspots',
+    name: 'Topspots',
+    component: Topspots
   },
   {
     path: '/contributors',

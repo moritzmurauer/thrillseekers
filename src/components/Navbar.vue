@@ -9,6 +9,7 @@
         <div class="topics">
           <router-link :to="{ name: 'Posts'}">Posts</router-link>
           <router-link :to="{ name: 'Contributors'}">Community</router-link>
+          <router-link :to="{ name: 'Topspots'}">Topspots</router-link>
         </div>
       </div>
 
@@ -33,7 +34,7 @@
               </div>
 
                <div v-if="toggleDropdown" @click="toggleDropdown = false">
-                <div v-if="user" class="avatar-nav ">
+                <div v-if="user" class="avatar-nav">
                   <div v-if="user">
                     <i class="fas fa-folder-minus"></i>
                   </div>
@@ -51,7 +52,8 @@
           </div>
 
           <div class="dropdown-menu" v-if="toggleDropdown">
-            <div class="d-flex" @click="toggleDropdown = false">
+
+            <div class="d-flex mt-1" @click="toggleDropdown = false">
               <i class="far fa-plus-square"></i>
               <router-link :to="{ name: 'CreateSpot'}">Add Spot</router-link>
             </div>
@@ -182,6 +184,7 @@
 
   nav .dropdown-menu {
     display: flex;
+    padding: 0 30px;
     flex-direction: column;
     position: absolute;
     right: 5px;
@@ -196,6 +199,8 @@
   nav .dropdown-menu div:hover {
     background-color: rgba(128, 128, 128, 0.109);
   }
+
+  
 
 
   

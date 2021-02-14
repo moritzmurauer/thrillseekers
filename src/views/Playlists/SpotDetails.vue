@@ -12,29 +12,12 @@
 
     <div class="d-flex space-between ">
       
-      <router-link :to="{ name: 'UserProfile', params: {id: playlist.userId}}">
-      <div class="added-by">
-        
-        <div v-if="playlist.avatarUrl">
-          <img class="avatar mr-1" :src="playlist.avatarUrl">
-        </div>
-        <div v-else>
-          <img class="avatar mr-1" src="@/assets/default.png">
-        </div>
-        <div>
-          <p>added by</p>
-          
-           <p class="quad">{{ playlist.userName }}</p> 
-        </div>
-        
-      </div>
-      </router-link>
-
+<!-- Likessystem -------------------------------------------------->
       <div>
         <div class="likes">
           <div  class="secondary d-flex">
 
-            <div class="pr-1">{{playlist.likes.length}}</div>
+            <div class="pr-1"><div></div> {{playlist.likes.length}} <small>liked this spot</small> </div>
             <div v-if="user">
                  <!-- Like -->
                 <i v-if="!playlist.likes.includes(user.uid)" @click="handleLikes" class="far fa-heart"></i>
@@ -47,10 +30,34 @@
             </div>
         </div>
       </div>
-    </div>
+    
+<!---------------------------------------------------------------------------->
+
+      <!-- Author of the spot -------------------------------------------------->
+      <router-link :to="{ name: 'UserProfile', params: {id: playlist.userId}}">
+      <div class="added-by">
+       
+        <div class="text-right">
+           <p>added by</p>
+           <p class="quad">{{ playlist.userName }}</p> 
+        </div>
+
+        <div class="ml-1">
+         <div v-if="playlist.avatarUrl">
+          <img class="avatar mr-1" :src="playlist.avatarUrl">
+        </div>
+        <div v-else>
+          <img class="avatar mr-1" src="@/assets/default.png">
+        </div>
+        </div>
+        
+      </div>
+      </router-link>
+      <!---------------------------------------------------------------------->
+
 
     
-
+    </div>
   </div>
 
   <div class="spot-outer">
@@ -166,7 +173,6 @@
 
 
       const handleLikes = async () => {
-        console.log(playlist.value);
         const userLiked = playlist.value.likes.includes(user.value.uid)
         if (!userLiked) {
           const newLike = user.value.uid
@@ -279,6 +285,10 @@
     cursor: pointer;
   }
 
+  .text-right {
+    text-align: right;
+  }
+
   .details-header {
     display: flex;
   }
@@ -367,6 +377,7 @@
   .avatar {
     width: 50px;
     height: 50px;
+    box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.2);
   }
 
   .likes {
