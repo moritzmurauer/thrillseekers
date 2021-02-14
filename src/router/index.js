@@ -10,6 +10,7 @@ import SpotDetails from '../views/Playlists/SpotDetails.vue'
 import UserProfile from '../views/Playlists/UserProfile.vue'
 import AddProfileInfo from '../views/Profile/AddProfileInfo.vue'
 import Category from '../views/Category/Category.vue'
+import NotFound from '../views/NotFound.vue'
 
 
 
@@ -86,6 +87,10 @@ const routes = [
     name: 'AddProfileInfo',
     component: AddProfileInfo,
     beforeEnter: requireAuth
+  },
+  {
+  path: "/:catchAll(.*)",
+  component: NotFound,
   },
 
 

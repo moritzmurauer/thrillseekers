@@ -3,7 +3,7 @@
 
 
       <div class="mt-3 d-flex space-between align-items-baseline ">
-        <h2><span class="secondary">Top 10 </span>contributors </h2>
+        <h2>Top 10 <span class="secondary">contributors </span> </h2>
         <p>Number of added Spots</p>
       </div>
       <div v-for="(user, index) in topList"  :key="user.id" >

@@ -7,11 +7,14 @@
             <img class="avatar avatar-profile" v-if="!userInfo.avatarUrl" src="@/assets/default.png">
   </div>
   <div class="user-info ml-2">
+   
     <h2 class="mb-1">{{userInfo.displayName}}</h2>
     <p class="mb-1"><strong>{{spots.length}}</strong> added Spots</p>
     <p v-if="userInfo.sport" class="quad">{{userInfo.sport}}</p>
     <p v-else class="quad">User</p>
   </div>
+
+  
 </div>
 
 

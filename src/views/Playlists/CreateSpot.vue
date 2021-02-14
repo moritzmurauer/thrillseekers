@@ -23,6 +23,7 @@
         <div>
     <button class="btn-orange mt-1" @click="findLocation">
       Search location
+      <i class="white fas fa-map-marker-alt"></i>
     </button>
 
     
@@ -30,7 +31,11 @@
 
 
     <div v-if="locResult">
-        <button class="mt-1 ml-3 btn" @click="submitForm">Add Infos -> -> -></button>
+        <button class="mt-1 ml-3 btn" @click="submitForm">
+            Add Infos 
+            <i class="white fas fa-arrow-circle-right"></i>
+            
+        </button>
       
       
     </div>
@@ -392,5 +397,9 @@
 
 .btn-create {
         margin: 0;
+}
+
+textarea {
+    line-height: 1.4rem;
 }
 </style>

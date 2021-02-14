@@ -87,6 +87,14 @@ export default {
     overflow: hidden;
     border-radius: 10px;
   }
+
+  .thumbnail > img {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+  }
+  
   img {
     max-width: 150%;
     max-height: 150%;

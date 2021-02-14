@@ -86,13 +86,26 @@
 
 
        <h4 class="pt-2 mb-1">Commentsection</h4> 
-      <div v-if="!playlist.songs.length">No Comments yet</div>
+      <div class="mb-3" v-if="!playlist.songs.length">
+        <p>No Comments yet!</p> 
+      </div>
+
         <div v-for="song in playlist.songs" class="card card-comment mt-1" :key="song.id">
           <CommentSingle v-if="song" :song="song" />
           <button class="btn-delete" @click="deleteSong(song.id)" v-if="ownership">delete</button>
         </div>
+
         <AddComment v-if="user" :playlist="playlist" />
+
+        <div class="mb-3 card p-2" v-if="!user">
+          <h4 class=" mb-1">Send with us &#129305;</h4>
+          <p>Post your own spots and become a part of the community!</p>
+          <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+        </div>
+
       </div>
+
+      
 
       <!-- song list -->
       <div class="song-list">
@@ -317,7 +330,7 @@
     overflow: hidden;
     border-radius: 5px;
     position: relative;
-    padding: 160px;
+    padding: 230px;
   }
 
   .cover img {
@@ -325,10 +338,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 120%;
-    max-height: 120%;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 400px;
   }
 
   
@@ -337,6 +350,10 @@
     text-transform: capitalize;
     font-size: 28px;
     margin-top: 20px;
+  }
+
+  .playlist-info p {
+    line-height: 1.6rem;
   }
 
   .playlist-info p {

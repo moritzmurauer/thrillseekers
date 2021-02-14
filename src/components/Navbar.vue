@@ -25,7 +25,7 @@
               <div v-if="!toggleDropdown" @click="toggleDropdown = true">
                 <div v-if="user" class="avatar-nav">
                   <div v-if="user">
-                    <i class="fas fa-folder-minus"></i>
+                    <i class="fas fa-th-large"></i>
                   </div>
                   <div v-else>
                     <img class="avatar mr-1" src="@/assets/default.png">
@@ -36,7 +36,7 @@
                <div v-if="toggleDropdown" @click="toggleDropdown = false">
                 <div v-if="user" class="avatar-nav">
                   <div v-if="user">
-                    <i class="fas fa-folder-minus"></i>
+                   <i class="fas fa-th-large"></i>
                   </div>
                   <div v-else>
                     <img class="avatar active-dropdown mr-1" src="@/assets/default.png">
@@ -161,9 +161,8 @@
 
   nav .links {
     margin-left: auto;
-
     position: relative;
-    right: 40px;
+    right: 0px;
   }
 
   nav .links a,
@@ -187,7 +186,8 @@
     padding: 0 30px;
     flex-direction: column;
     position: absolute;
-    right: 5px;
+    top: 30px;
+    z-index: 1000;
     background-color: var(--secondary);
     box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.3);
   }
