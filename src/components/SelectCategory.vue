@@ -2,32 +2,44 @@
   <div class="categories content">
 
         <router-link  :to="{ name: 'Posts'}"> 
-          <div class="chip">
+          <div class="chip top">
               All
           </div>
         </router-link>
 
          <router-link  :to="{ name: 'Category', params: {id: cliff}}"> 
           <div class="chip">
-              {{cliff}}
+            <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-cliff.png" alt="cliff icon">
+              <p>{{cliff}}</p>
+            </div>
           </div>
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: bridge}}"> 
           <div class="chip">
-              {{bridge}}
+              <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-bridge.png" alt="cliff icon">
+              <p>{{bridge}}</p>
+            </div>
           </div>
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: swing}}"> 
           <div class="chip">
-              {{swing}}
+               <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-tire_swing.png" alt="cliff icon">
+              <p>{{swing}}</p>
+            </div>
           </div>
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: pool}}"> 
           <div class="chip">
-              {{pool}}
+              <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-diving.png" alt="cliff icon">
+              <p>{{pool}}</p>
+            </div>
           </div>
         </router-link>
       </div>
@@ -53,8 +65,17 @@ export default {
         margin: 15px 0;
     }
 
+    .icon {
+      width: 20px;
+      margin-right: 5px;
+    }
+
     .categories .chip {
         margin-right: 15px;
+    }
+
+    .top {
+      margin-bottom: 100px;
     }
 
     a.router-link-exact-active .chip {
