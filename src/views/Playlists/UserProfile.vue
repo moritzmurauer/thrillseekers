@@ -79,7 +79,7 @@
 
           <div class="d-flex">
          <p>Added by {{spot.userName}}</p>
-            <div v-if="spots" class="spot-avatar">
+            <div v-if="userInfo" class="spot-avatar">
             <img class="avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl">
             <img class="avatar" v-if="!userInfo.avatarUrl" src="@/assets/default.png">
         </div>
@@ -100,7 +100,7 @@
         <div v-if="userDocs">
         <div class="d-flex user-single align-center card card-user" v-for="userDoc in userDocs" :key="userDoc.id">
           
-          <div class="pr-1">
+          <div v-if="userDocs.length" class="pr-1">
           <img class="avatar avatar-user" v-if="userDoc.avatarUrl" :src="userDoc.avatarUrl">
           <img class="avatar avatar-user" v-if="!userDoc.avatarUrl" src="@/assets/default.png">
           </div>
@@ -133,7 +133,6 @@ import getDocument from '@/composables/getDocument'
 import ListView from '@/components/ListView.vue'
 import Profile from '@/components/Profile.vue'
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
 export default {
 
 components: {ListView, Profile},

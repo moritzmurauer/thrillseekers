@@ -1,5 +1,7 @@
 <template>
 
+
+
   <div v-if="playlist" class="content">
     <div class="details-header  mt-3">
       <h2>{{ playlist.title }}</h2>
@@ -177,8 +179,8 @@
       const {user} = getUser()
 
 
-      const {updateDoc: spotCounter } = useDocument('users', user.uid)
-      const {document: userInfo} = getDocument('users', user.uid)
+      const {updateDoc: spotCounter } = useDocument('users', user.value.uid)
+      const {document: userInfo} = getDocument('users', user.value.uid)
       const {deleteDoc, updateDoc} = useDocument('playlists', props.id)
       const {deleteImage} = useStorage()
 
