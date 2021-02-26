@@ -14,7 +14,7 @@
           </div>
             <p>{{user.bio}}</p>
             <small v-if="user.home">From: {{user.home}}</small>
-            
+            <!-- yolo -->
         </div>
         </router-link>
       </div>
