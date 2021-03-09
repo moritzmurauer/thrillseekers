@@ -1,14 +1,19 @@
 <template>
   <div class="categories content">
 
-        <router-link  :to="{ name: 'Posts'}"> 
-          <div class="chip top">
-              All
+      
+
+        <router-link  :to="{ name: 'Posts'}">
+          <div class="chip bottom">
+            <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-waterfall.png" alt="cliff icon">
+              <p>All</p>
+            </div>
           </div>
         </router-link>
 
          <router-link  :to="{ name: 'Category', params: {id: cliff}}"> 
-          <div class="chip">
+          <div class="chip bottom">
             <div class="d-flex align-items-center">
               <img class="icon" src="@/assets/imgs/icons/icons8-cliff.png" alt="cliff icon">
               <p>{{cliff}}</p>
@@ -17,7 +22,7 @@
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: bridge}}"> 
-          <div class="chip">
+          <div class="chip bottom">
               <div class="d-flex align-items-center">
               <img class="icon" src="@/assets/imgs/icons/icons8-bridge.png" alt="cliff icon">
               <p>{{bridge}}</p>
@@ -26,7 +31,7 @@
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: swing}}"> 
-          <div class="chip">
+          <div class="chip bottom">
                <div class="d-flex align-items-center">
               <img class="icon" src="@/assets/imgs/icons/icons8-tire_swing.png" alt="cliff icon">
               <p>{{swing}}</p>
@@ -35,7 +40,7 @@
         </router-link>
 
         <router-link  :to="{ name: 'Category', params: {id: pool}}"> 
-          <div class="chip">
+          <div class="chip bottom">
               <div class="d-flex align-items-center">
               <img class="icon" src="@/assets/imgs/icons/icons8-diving.png" alt="cliff icon">
               <p>{{pool}}</p>
@@ -74,7 +79,7 @@ export default {
         margin-right: 15px;
     }
 
-    .top {
+    .bottom {
       margin-bottom: 100px;
     }
 

@@ -12,7 +12,9 @@
 <div class="card-search card content">
              <div class="searchcard text-center pt-2">
              <h3 class="pt-1">Thrillseeker</h3> 
-             <input type="text" placeholder="Search title.."/>         
+             <div class="mt-2">
+               <SelectCategory />
+             </div>        
              </div>       
 </div>
 
@@ -21,34 +23,12 @@
   <h2>Explore <span class="secondary">Spots</span> </h2>
   <router-link  :to="{ name: 'Posts'}">See all</router-link>
 </div>
-<div class="spots  ">
+<div class="spots">
   <PostsHome :posts="documents" />
 </div>
 </div>
 
 
-<!--
-<div class="content mt-6">
-<div class="d-flex space-between">
-  <h2>Upcoming  <span class="secondary">Events</span></h2>
-  <router-link  :to="{ name: 'Posts'}">See all</router-link>
-</div>
-<div class="events  mt-1">
-  <div class="card p-1">
-    <p>first</p>
-  </div>
-  <div class="card p-1">
-    <p>second</p>
-  </div>
-  <div class="card p-1">
-    <p>third</p>
-  </div>
-  <div class="card p-1">
-    <p>quad</p>
-  </div>
-</div>
-</div>
--->
 
 
 
@@ -64,7 +44,7 @@
 
 
 <div class="community mt-6">
-  <div class="content m-auto community-inside">
+  <div class="content community-inside">
     <div class="community-content pb-8">
 
       <div v-if="!user">
@@ -101,6 +81,7 @@
 import UsersHome from '../components/Home/UsersHome.vue'
 import PostsHome from '../components/Home/PostsHome.vue'
 import Categories from '../components/Categories.vue'
+import SelectCategory from '../components/SelectCategory.vue'
 import Footer from '../components/Footer.vue'
 import getLimitedCollection from '../composables/getLimitedCollection'
 import getOrderedCollection from '@/composables/getOrderedCollection'
@@ -108,7 +89,7 @@ import getUser from '../composables/getUser'
 
 export default {
   name: 'Home',
-  components: { PostsHome, UsersHome, Categories, Footer },
+  components: { PostsHome, UsersHome, Categories, SelectCategory, Footer },
 
   setup() {
     const { error, documents } = 
@@ -118,13 +99,6 @@ export default {
 
     const {user} = getUser()
     const {error: userError, documents: userDocs} = getOrderedCollection(6)
-
-        // 
-   // <UsersHome :users="userDocs" />
-   // 
-
-
-    
     return { error, documents, userDocs, userError, user }
   }
   }
@@ -240,17 +214,70 @@ export default {
     margin-left: auto; 
     margin-right: auto; 
     z-index: 1;
-    
     width: 600px; /* Need a specific value to work */
   }
 
 
 
 
-  @media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
     .header-content {
       padding-left: 100px;
     }
-}
+} 
+
+@media only screen and (max-width: 1000px) {
+  .header-content {
+    padding-left: 50px;
+    margin: 0 auto;
+    padding-top: 10rem
+  }
+
+  .header-content h1 {
+    font-size: 2.3rem;
+  }
+
+  .header-content p {
+    padding-top: 20px;
+    width: 300px;
+    line-height: 1.6;
+  }
+
+  .contributors {
+    grid-template-columns: 1fr 1fr 1fr;
+    flex-wrap: wrap;
+  }
+
+  .community-content {
+    width: 400px;
+  }
+  
+
+
+    .spots, .events {
+      flex-wrap: wrap;
+      grid-template-columns: 1fr 1fr;
+  }
+
+} 
+
+
+@media only screen and (max-width: 600px) {
+    .spots, .events {
+      grid-template-columns: 1fr;
+  }
+
+  .contributors {
+    grid-template-columns: 1fr 1fr;
+    flex-wrap: wrap;
+  }
+
+  .community-content {
+    width: 200px;
+  }
+} 
+
+
+
 </style>
 
