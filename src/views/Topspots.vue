@@ -127,4 +127,33 @@ export default {
     margin-left: 5px;
   }
 
+  @media only screen and (max-width: 800px) {
+    .outer-grid {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin-bottom: 200px;
+    }
+
+    .cover {
+      height: 150px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .outer-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .cover {
+      height: 120px;
+    }
+
+    h4 {
+      font-size: 0.7rem;
+    }
+
+    .spot-likes {
+      top:78%;
+    }
+  }
+
 </style>
