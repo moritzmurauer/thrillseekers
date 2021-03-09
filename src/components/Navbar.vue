@@ -142,7 +142,10 @@
       
       </div>
 
-
+      <div class="login-signin" v-if="!user">
+                <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+                <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+      </div>
 
 
     </nav>
@@ -335,6 +338,10 @@
     display: none;
   }
 
+  .login-signin {
+    display: none;
+  }
+
   .mobile-links {
     display: block;
     margin-left: auto;
@@ -395,7 +402,6 @@
       padding: 35px 0px;
       border-top: 1px solid rgba(255, 215, 215, 0.09);
       z-index: 100000;
-      
     }
 
     nav .mobile-links a,
