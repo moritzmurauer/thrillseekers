@@ -1,4 +1,5 @@
 <template>
+<div class="navigation">
   <div class="navbar">
     <nav>
       <img src="@/assets/imgs/artwork_logo.png">
@@ -14,8 +15,6 @@
       </div>
 
       <div class="links">
-
-
         <div v-if="user">
           <div class="d-flex align-items-center">
             <div class="pr-1">
@@ -74,13 +73,106 @@
 
         </div>
 
-      <div v-if="!user">
-        <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
-        <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+      
       </div>
+
+      <!-- Mobile------------->
+
+      <div class="mobile-links">
+        <div>
+          <div class="d-flex align-items-center">
+            <div v-if="!user">
+                <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+                <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+              </div>
+            <div class="pr-1">
+              <button v-if="user" @click="userLogout" class="btn">Logout</button>
+            </div>
+            <div>
+              <div v-if="!toggleDropdown" @click="toggleDropdown = true">
+                <i class="fas fa-list"></i>
+              </div>
+
+               <div v-if="toggleDropdown" @click="toggleDropdown = false">
+                <div v-if="user" class="avatar-nav">
+                  <div v-if="user">
+                   <i class="fas fa-list"></i>
+                  </div>
+                  <div v-else>
+                    <img class="avatar active-dropdown mr-1" src="@/assets/default.png">
+                  </div>
+                </div>
+              </div>
+
+              
+
+              </div>
+
+              
+          </div>
+
+          <div>
+            
+          </div>
+
+          <div class="dropdown-menu" v-if="toggleDropdown">
+
+          
+         
+          
+
+            <div class="d-flex mt-1" @click="toggleDropdown = false">
+              <router-link :to="{ name: 'Posts'}">Posts</router-link>
+            </div>
+
+            <div class="d-flex" @click="toggleDropdown = false">
+               <router-link :to="{ name: 'Contributors'}">Community</router-link>
+            </div>
+
+            <div class="d-flex" @click="toggleDropdown = false">
+              <router-link :to="{ name: 'Topspots'}">Topspots</router-link>
+            </div>
+
+
+            
+          </div>
+
+        </div>
+
+      
       </div>
+
+
+
+
     </nav>
   </div>
+
+
+  
+
+  <div v-if="user" class="mobile-nav">
+     <div class="link">
+      <i class="far fa-edit white"></i>
+      <router-link class="white" :to="{ name: 'AddProfileInfo'}">Update Info</router-link>
+    </div>
+
+    <div class="link">
+      <i class="far fa-plus-square white"></i>
+      <router-link class="white" :to="{ name: 'CreateSpot'}">Add Spot</router-link>
+    </div>
+
+    <div class="link">
+      <i class="far fa-user-circle white"></i>
+      <router-link class="white" :to="{ name: 'UserProfile', params: {id: user.uid}}">Profile</router-link>
+    </div>
+  </div>
+  <div v-else>
+    
+  </div>
+</div>
+
+
 </template>
 
 <script>
@@ -141,7 +233,6 @@
     background: white;
     border-bottom: 1px solid var(--secondary);
     box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.1);
-
   }
 
   nav {
@@ -222,4 +313,104 @@
   .btn {
     color: white;
   }
+
+  .navigation {
+    position: relative;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-links {
+    display: none;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .topics {
+      display: none;
+    }
+
+    .links {
+    display: none;
+  }
+
+  .mobile-links {
+    display: block;
+    margin-left: auto;
+    position: relative;
+    right: 20px;
+  }
+
+  nav .mobile-links a,
+  button {
+    margin-left: 16px;
+    font-size: 14px;
+  }
+
+    .mobile-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 92vh;
+      background: var(--primary);
+      width: 100%;
+      padding: 35px 0px;
+      z-index: 100000;
+    }
+
+    .link {
+      margin: 0 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .link .far {
+      margin-right: 5px;
+    }
+
+    nav .dropdown-menu {
+      margin: auto;
+      padding: 0;
+      top: 50px;
+      right: -14px;
+      height: 80vh;
+    }
+
+} 
+
+
+@media only screen and (max-width: 600px) {
+   .mobile-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 90vh;
+      background: var(--primary);
+      width: 100%;
+      padding: 35px 0px;
+      border-top: 1px solid rgba(255, 215, 215, 0.09);
+      z-index: 100000;
+      
+    }
+
+    nav .mobile-links a,
+    button {
+    margin-left: 4px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+    .link {
+      margin: 0 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+} 
 </style>

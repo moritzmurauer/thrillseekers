@@ -194,9 +194,8 @@ export default {
   }
 
   .community img {
-    max-width: 90%;
+    max-width: 85%;
     height: auto;
-    padding: 50px;
     position: relative;
   }
 

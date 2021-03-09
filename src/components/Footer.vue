@@ -65,7 +65,7 @@
 <style scoped>
     footer {
         background: var(--primary);
-        
+        max-width: 100%;
     }
 
     .footer-container {
@@ -103,9 +103,14 @@
         padding-right: 15px;
     }
 
+    .legal {
+        flex-wrap: wrap;
+    }
+     
     .legal a {
        padding-right: 50px; 
-       color: white
+       color: white;
+       
     }
 
      @media only screen and (max-width: 1200px) {
