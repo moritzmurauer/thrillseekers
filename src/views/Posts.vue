@@ -1,5 +1,5 @@
 <template>
-  <div class="home pt-2">
+  <div class="home pt-2 mb-8">
     <div v-if="error" class="error">Could not fetch the data</div>
 
 <!--

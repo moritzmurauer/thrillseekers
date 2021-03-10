@@ -77,19 +77,21 @@
         </div>
 
 
- 
-        
+      <div class="spot-infos">
         <h4 class="pt-2 mb-1">Details</h4>
         <p class="description">{{ playlist.description }}</p>
 
         <h4 class="pt-2 mb-1">Height:</h4>
         <p class="description">{{ playlist.height + " meters" }}</p>
+      </div>
+        
 
 
-
+      <div class="spot-infos">
        <h4 class="pt-2 mb-1">Commentsection</h4> 
       <div class="mb-3" v-if="!playlist.songs.length">
         <p>No Comments yet!</p> 
+      </div>
       </div>
 
         <div v-for="song in playlist.songs" class="card card-comment mt-1" :key="song.id">
@@ -110,13 +112,14 @@
       
 
       <!-- song list -->
-      <div class="song-list">
+      <div class="map-card">
+        <a target="_blank" :href="spotUrl">
         <div class="card p-1">
           <div class="map-location">
             <i class="fas fa-map-marker-alt"></i>
-            <a target="_blank" :href="spotUrl">    
+                
             <p class="pb-2">{{ playlist.location }}</p>
-        </a>
+        
         </div>
 
         <Gmap :disableUI="false" :zoom="8" mapType="roadmap" :center="playlist.position"
@@ -126,6 +129,7 @@
        
         
         </div>
+      </a>
       </div>
        <button class="btn warningbtn mb-1" v-if="ownership" @click="handleDelete">Delete Spot</button>
     </div>
@@ -312,6 +316,8 @@
     background-color: var(--secondary)
   }
 
+  
+
   .playlist-details {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -332,7 +338,7 @@
     overflow: hidden;
     border-radius: 5px;
     position: relative;
-    padding: 230px;
+    padding: 200px;
   }
 
   .cover img {
@@ -420,6 +426,35 @@
 .map-location i {
   font-size: 1.7rem;
   padding: 10px 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .more-spots {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 150px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+ .playlist-details {
+    display: block;
+  }
+
+  .cover {
+    max-width: 90%;
+  }
+
+  .spot-infos {
+    padding: 0 20px;
+  }
+
+
+  .map-card {
+    margin-top: 50px;
+  }
 }
   
 </style>

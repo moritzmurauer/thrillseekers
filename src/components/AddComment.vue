@@ -75,4 +75,8 @@ setup(props) {
     margin: 0;
     background-color:white ;
   }
+
+  .btn {
+    width: 100%;
+  }
 </style>

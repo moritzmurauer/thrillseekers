@@ -155,20 +155,26 @@
   
 
   <div v-if="user" class="mobile-nav">
+    <router-link class="white" :to="{ name: 'AddProfileInfo'}">
      <div class="link">
       <i class="far fa-edit white"></i>
-      <router-link class="white" :to="{ name: 'AddProfileInfo'}">Update Info</router-link>
+      <p class="white">Edit</p>
     </div>
+  </router-link>
 
+<router-link class="white" :to="{ name: 'CreateSpot'}">
     <div class="link">
       <i class="far fa-plus-square white"></i>
-      <router-link class="white" :to="{ name: 'CreateSpot'}">Add Spot</router-link>
+      <p class="white">Add</p>
     </div>
+  </router-link>
 
+    <router-link class="white" :to="{ name: 'UserProfile', params: {id: user.uid}}">
     <div class="link">
       <i class="far fa-user-circle white"></i>
-      <router-link class="white" :to="{ name: 'UserProfile', params: {id: user.uid}}">Profile</router-link>
+      <p class="white">Profile</p>
     </div>
+    </router-link>
   </div>
   <div v-else>
     
@@ -236,6 +242,10 @@
     background: white;
     border-bottom: 1px solid var(--secondary);
     box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.1);
+  }
+
+  .mobile-icon {
+    border: 1px solid white;
   }
 
   nav {
@@ -396,10 +406,10 @@
       justify-content: space-between;
       align-items: center;
       position: fixed;
-      top: 90vh;
+      top: 92vh;
       background: var(--primary);
       width: 100%;
-      padding: 35px 0px;
+      padding: 13px 0px;
       border-top: 1px solid rgba(255, 215, 215, 0.09);
       z-index: 100000;
     }
@@ -416,6 +426,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid white;
+      padding: 8px;
+      border-radius: 4px;
     }
 
 } 
