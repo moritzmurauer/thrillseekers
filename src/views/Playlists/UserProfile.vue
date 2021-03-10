@@ -95,7 +95,9 @@
 
     </div>
 
-    <div class="user-posts">
+    
+
+    <div class="user-posts mb-6">
         <h4>Who to <span class="quad">follow</span> </h4>
         <div v-if="userDocs">
         <div class="d-flex user-single align-center card card-user" v-for="userDoc in userDocs" :key="userDoc.id">
@@ -114,6 +116,10 @@
       </div>
       
     </div>
+
+   
+
+    
   </div>
 </div>
 
@@ -270,4 +276,23 @@ setup() {
   .user-link {
     margin-top: 8px;
   }
+
+@media only screen and (max-width: 1050px) {
+ .profile-inner{
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  }
+
+
+  @media only screen and (max-width: 800px) {
+ .profile-inner{
+    display: block;
+  }
+
+  
+
+  }
+
+
+
 </style>

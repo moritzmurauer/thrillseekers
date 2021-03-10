@@ -19,9 +19,9 @@
 
     <small class="error ml-1 " v-if="mapError">{{mapError}}</small>
     
-    <div class="d-flex">
+    <div class="d-flex wrap">
         <div>
-    <button class="btn-orange mt-1" @click="findLocation">
+    <button class="ml-8 pl-4 pr-4 btn-orange info-button mt-1" @click="findLocation">
       Search location
       <i class="white fas fa-map-marker-alt"></i>
     </button>
@@ -31,7 +31,7 @@
 
 
     <div v-if="locResult">
-        <button class="mt-1 ml-3 btn" @click="submitForm">
+        <button class="mt-1 pl-4 pr-4 ml-2 btn" @click="submitForm">
             Add Infos 
             <i class="white fas fa-arrow-circle-right"></i>
             
@@ -402,4 +402,26 @@
 textarea {
     line-height: 1.4rem;
 }
+
+.btn {
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .mapcontent {
+    padding: 20px;
+    }
+
+    .wrap {
+        flex-wrap: wrap;
+    }
+
+    .info-button {
+        margin-left: 32px;
+    }
+    
+}
+
+
 </style>
