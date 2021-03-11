@@ -183,8 +183,8 @@
       const {user} = getUser()
 
 
-      const {updateDoc: spotCounter } = useDocument('users', user.value.uid)
-      const {document: userInfo} = getDocument('users', user.value.uid)
+      const {updateDoc: spotCounter } = useDocument('users', user.uid)
+      const {document: userInfo} = getDocument('users', user.uid)
       const {deleteDoc, updateDoc} = useDocument('playlists', props.id)
       const {deleteImage} = useStorage()
 

@@ -288,9 +288,6 @@ setup() {
  .profile-inner{
     display: block;
   }
-
-  
-
   }
 
 
