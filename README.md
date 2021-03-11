@@ -1,4 +1,8 @@
 # thrillseekers
+```
+welcome to thrillseekers! The archive and platform for divers and extrem sport artist.
+Discover your next adventure.
+```
 
 ## Project setup
 ```

@@ -12,7 +12,7 @@
 
 <script>
 import moment from "moment"
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 export default {
    props: ['song'],
 
