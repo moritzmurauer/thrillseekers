@@ -1,5 +1,6 @@
 <template>
 
+<!-- Header -->
 <div class="header">     
   <div class="header-content">
     <h1 >Jump into your <br> next <span class="secondary">adventure</span>!</h1>
@@ -8,7 +9,7 @@
   </div>
 </div>  
 
-
+<!-- Category selector -->
 <div class="card-search card content">
              <div class="searchcard text-center pt-2">
              <h3 class="pt-1">Thrillseeker</h3> 
@@ -18,6 +19,7 @@
              </div>       
 </div>
 
+<!-- Spots to explore -->
 <div class="postContent content">
 <div class="mt-6 c d-flex space-between">
   <h2>Explore <span class="secondary">Spots</span> </h2>
@@ -29,9 +31,7 @@
 </div>
 
 
-
-
-
+<!-- Users to check out -->
 <div class="content mt-6 ">
     <div class="d-flex space-between mb-1">
   <h2>Meet the top <span class="secondary">contributors!</span> </h2>
@@ -43,6 +43,7 @@
 </div>
 
 
+<!-- Communitysection -->
 <div class="community mt-6">
   <div class="content community-inside">
     <div class="community-content pb-8">
@@ -63,7 +64,7 @@
   </div>
 </div>
 
-
+<!-- All Categories -->
 <div class="mt-6">
   <Categories />
 </div>

@@ -1,4 +1,7 @@
 <template>
+
+<!-- Single Post in Collection of Posts -->
+
 <div class="single-post">
   <router-link :to="{name: 'SpotDetails', params: {id: post.id}}">
       <div class="single">
@@ -16,7 +19,7 @@
                 <small class="quad chip-text"> {{post.height}} m</small></i>
             </div>
             <br>  
-            <small >{{snippet}}</small>
+            <small>{{snippet}}</small>
             
             <div class="pt-1 postBottom">
               <div class="addedBy">
@@ -35,9 +38,7 @@
                 <p class="secondary"><i class="far fa-heart"></i> {{post.likes.length}}</p>
                 
             </div>
-        </div>
-
-        
+        </div>  
       </div>
    </router-link>
 </div>
@@ -54,7 +55,7 @@ export default {
     setup(props) {
 
     
-
+    // computing length of description output
     const snippet = computed(() => {
         return props.post.description.substring(0,65) + '....'
     }) 

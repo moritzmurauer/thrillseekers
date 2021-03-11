@@ -1,6 +1,8 @@
 <template>
-  <div class="content" v-for="spot in spots" :key="spot.id">
 
+  <!-- A list of all spots in the collection -->
+  
+  <div class="content" v-for="spot in spots" :key="spot.id">
      <router-link :to="{name: 'SpotDetails', params: {id: spot.id}}">
       <div class="single">
         <div class="thumbnail">

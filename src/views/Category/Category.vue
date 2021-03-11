@@ -1,9 +1,9 @@
 <template>
+
+  <!-- Categories and Spot overview -->
   <div class="home pt-2">
     <div v-if="error" class="error">Could not fetch the data</div>
-    <div v-if="spots">
-      
-      
+    <div v-if="spots">     
       <SelectCategory />
       <ListView :spots="spotsWithCategory" />
     </div>

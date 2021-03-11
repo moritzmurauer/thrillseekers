@@ -1,6 +1,7 @@
 <template>
+
+  <!-- Adding comment under a post -->
   <div class="add-song">
-    
       <form @submit.prevent="handleSubmit">
           <h4>Add a Comment</h4>
           <small>commenting as {{user.displayName}}</small>
@@ -32,7 +33,7 @@ setup(props) {
 
 
 
-
+  // Submits userinformation & comment content to Database
   
   const handleSubmit = async () => {
       const newSong = {

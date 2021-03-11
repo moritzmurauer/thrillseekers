@@ -5,8 +5,11 @@ const useDocument = (collection, id) => {
     const error = ref(null)
     const isPending = ref(false)
 
-    let docRef = projectFirestore.collection(collection).doc(id)
 
+  // Select Document by ID
+  let docRef = projectFirestore.collection(collection).doc(id)
+
+  // Delete selected Document
   const deleteDoc = async () => {
     isPending.value = true
     error.value = null
@@ -23,7 +26,7 @@ const useDocument = (collection, id) => {
     }
   }
 
-
+    // Update selected Document
     const updateDoc = async (updates) => {
         isPending.value = true
         error.value = null

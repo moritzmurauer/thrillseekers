@@ -1,6 +1,8 @@
 <template>
-  <div class="content">
 
+<!-- User Overview -->
+
+  <div class="content">
     <h3>List of all Users</h3>
       <div v-for="user in users" :key="user.id" class="card">
         <router-link :to="{ name: 'UserProfile', params: {id: user.id}}">
@@ -14,19 +16,15 @@
           </div>
             <p>{{user.bio}}</p>
             <small v-if="user.home">From: {{user.home}}</small>
-            <!-- yolo -->
         </div>
         </router-link>
       </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  props: ['users'],
-
-  
+  props: ['users'], 
 }
 </script>
 

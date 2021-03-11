@@ -2,7 +2,7 @@
   <div class="categories content">
 
       
-
+      <!-- All Categories -->
         <router-link  :to="{ name: 'Posts'}">
           <div class="chip bottom">
             <div class="d-flex align-items-center">
@@ -12,6 +12,7 @@
           </div>
         </router-link>
 
+        <!-- Cliffs -->
          <router-link  :to="{ name: 'Category', params: {id: cliff}}"> 
           <div class="chip bottom">
             <div class="d-flex align-items-center">
@@ -21,6 +22,7 @@
           </div>
         </router-link>
 
+         <!-- Bridges -->
         <router-link  :to="{ name: 'Category', params: {id: bridge}}"> 
           <div class="chip bottom">
               <div class="d-flex align-items-center">
@@ -30,6 +32,8 @@
           </div>
         </router-link>
 
+
+       <!-- Swings -->
         <router-link  :to="{ name: 'Category', params: {id: swing}}"> 
           <div class="chip bottom">
                <div class="d-flex align-items-center">
@@ -39,6 +43,8 @@
           </div>
         </router-link>
 
+
+        <!-- Pools -->
         <router-link  :to="{ name: 'Category', params: {id: pool}}"> 
           <div class="chip bottom">
               <div class="d-flex align-items-center">

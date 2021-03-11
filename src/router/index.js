@@ -18,6 +18,8 @@ import NotFound from '../views/NotFound.vue'
 //route guard
 import { projectAuth } from '../firebase/config'
 
+
+// Auth guard for routes to pretect certain pages and functionalities from not logged in users
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser
   if(!user) {
@@ -27,6 +29,8 @@ const requireAuth = (to, from, next) => {
   }
 }
 
+
+// all routes
 const routes = [
   {
     path: '/',
@@ -88,12 +92,12 @@ const routes = [
     component: AddProfileInfo,
     beforeEnter: requireAuth
   },
+
+  // ERRROR 404 page
   {
   path: "/:catchAll(.*)",
   component: NotFound,
   },
-
-
 
 ]
 

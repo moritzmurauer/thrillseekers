@@ -11,9 +11,6 @@ import SinglePost from '@/components/Home/SinglePost'
 export default {
   props: ['posts'],
   components: {SinglePost},
-
-  setup () {  
-  }
 }
 
 </script>

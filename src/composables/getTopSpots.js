@@ -13,6 +13,7 @@ const getTopSpots = (limit) => {
     .orderBy("likes", "desc").limit(limit)
 
 
+// Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
   const unsub = collectionRef.onSnapshot((snap) => {
         console.log('snapshot');
         let results = []

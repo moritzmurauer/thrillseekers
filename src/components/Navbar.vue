@@ -7,6 +7,8 @@
         <h2>
           <router-link class="logo-link font-pacifico" :to="{ name: 'Home'}">Thrillseekers</router-link>
         </h2>
+
+         <!-- Subpages -->
         <div class="topics">
           <router-link :to="{ name: 'Posts'}">Posts</router-link>
           <router-link :to="{ name: 'Contributors'}">Community</router-link>
@@ -14,6 +16,7 @@
         </div>
       </div>
 
+      <!-- Logged in Users -->
       <div class="links">
         <div v-if="user">
           <div class="d-flex align-items-center">
@@ -42,16 +45,11 @@
                   </div>
                 </div>
               </div>
-
               </div>
           </div>
 
-          <div>
-            
-          </div>
 
           <div class="dropdown-menu" v-if="toggleDropdown">
-
             <div class="d-flex mt-1" @click="toggleDropdown = false">
               <i class="far fa-plus-square"></i>
               <router-link :to="{ name: 'CreateSpot'}">Add Spot</router-link>
@@ -76,8 +74,7 @@
       
       </div>
 
-      <!-- Mobile------------->
-
+      <!-- Mobile Navigation if not logged in------------->
       <div class="mobile-links">
         <div>
           <div class="d-flex align-items-center">
@@ -103,10 +100,7 @@
                   </div>
                 </div>
               </div>
-
-              
-
-              </div>
+           </div>
 
               
           </div>
@@ -116,10 +110,6 @@
           </div>
 
           <div class="dropdown-menu" v-if="toggleDropdown">
-
-          
-         
-          
 
             <div class="d-flex mt-1" @click="toggleDropdown = false">
               <router-link :to="{ name: 'Posts'}">Posts</router-link>
@@ -132,19 +122,14 @@
             <div class="d-flex" @click="toggleDropdown = false">
               <router-link :to="{ name: 'Topspots'}">Topspots</router-link>
             </div>
-
-
-            
+     
           </div>
-
-        </div>
-
-      
+        </div>    
       </div>
 
       <div class="login-signin" v-if="!user">
-                <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
-                <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
+          <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+          <router-link :to="{ name: 'Login'}"> <button class="btn"> Log in </button></router-link>
       </div>
 
 
@@ -153,7 +138,7 @@
 
 
   
-
+<!-- Mobile Navigation if logged in------------->
   <div v-if="user" class="mobile-nav">
     <router-link class="white" :to="{ name: 'AddProfileInfo'}">
      <div class="link">

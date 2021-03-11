@@ -8,11 +8,12 @@ const getOrderedCollection = (limit) => {
     const error = ref(null)
 
 
-    
+    // Getting ordered Collection by preferred setting and limiting the output
     let collectionRef = projectFirestore.collection("users")
     .orderBy("addedSpots", "desc").limit(limit)
 
 
+// Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
   const unsub = collectionRef.onSnapshot((snap) => {
         console.log('snapshot');
         let results = []

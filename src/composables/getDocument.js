@@ -6,8 +6,10 @@ const getDocument = (collection, id) => {
     const document = ref(null)
     const error = ref(null)
 
+  // Getting Document by id from Database
   let documentRef = projectFirestore.collection(collection).doc(id)
 
+  // Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
   const unsub = documentRef.onSnapshot(doc => {
         if(doc.data()) {
             document.value = {...doc.data(), id: doc.id}

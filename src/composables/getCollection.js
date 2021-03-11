@@ -8,22 +8,14 @@ const getCollection = (collection, query) => {
     const error = ref(null)
 
 
-    
+    // Saving selected Collection and querying through it
     let collectionRef = projectFirestore.collection(collection)
 
     if(query) {
         collectionRef = collectionRef.where(...query)
     }
-
-    
-
-   
-
-    
-
-
-
-
+ 
+  // Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
   const unsub = collectionRef.onSnapshot((snap) => {
         console.log('snapshot');
         let results = []

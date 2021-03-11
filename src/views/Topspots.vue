@@ -1,7 +1,7 @@
 <template>
+
+  <!-- All top spots -->
   <div v-if="topSpots" class="content">
-
-
       <div class="mt-3 d-flex space-between align-items-baseline ">
         <h2>Top 10 <span class="secondary">Spots </span> </h2>
         <p>The community's favourites!</p>
@@ -22,13 +22,8 @@
         </div> 
       </div>
       </router-link>
-
-      
-
       </div>
     </div>
-
-
     </div>
   
 </template>

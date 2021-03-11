@@ -1,4 +1,6 @@
 <template>
+
+<!-- Error 404 page -->
   <div class="content">
       <div class="order-svg">
           <div class="block">

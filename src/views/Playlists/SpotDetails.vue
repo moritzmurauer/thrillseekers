@@ -55,10 +55,8 @@
         
       </div>
       </router-link>
-      <!---------------------------------------------------------------------->
 
 
-    
     </div>
   </div>
 
@@ -66,9 +64,6 @@
   <div class="content mt-2 pt-3">
     <div class="error" v-if="error">{{ error }}</div>
     <div v-if="playlist" class="playlist-details">
-
-
-
 
       <!-- playlist information -->
       <div class="playlist-info">
@@ -94,6 +89,7 @@
       </div>
       </div>
 
+      <!-- Commentsection -->
         <div v-for="song in playlist.songs" class="card card-comment mt-1" :key="song.id">
           <CommentSingle v-if="song" :song="song" />
           <button class="btn-delete" @click="deleteSong(song.id)" v-if="ownership">delete</button>
@@ -106,12 +102,11 @@
           <p>Post your own spots and become a part of the community!</p>
           <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
         </div>
-
       </div>
 
       
 
-      <!-- song list -->
+      <!-- Location and Map of spot -->
       <div class="map-card">
         <a target="_blank" :href="spotUrl">
         <div class="card p-1">
@@ -176,6 +171,7 @@
       'playlists', 4
       )
 
+      // gets Spot by ID
       const router = useRouter()
       let {document: playlist,error} = 
         getDocument('playlists', props.id)
@@ -188,9 +184,10 @@
       const {deleteDoc, updateDoc} = useDocument('playlists', props.id)
       const {deleteImage} = useStorage()
 
+      // base for google Url 
       const googleUrl = 'https://www.google.com/maps/search/?api=1&query='
 
-
+      // Like and unlike
       const handleLikes = async () => {
         const userLiked = playlist.value.likes.includes(user.value.uid)
         if (!userLiked) {
@@ -209,7 +206,7 @@
          playlist = getDocument('playlists', props.id).document    
       }
 
-
+      // Delete (only for spot creator)
       const handleDelete = async () => {
         await deleteDoc()
         await deleteImage(playlist.value.filePath)
@@ -222,8 +219,7 @@
         })
       }
 
-      console.log(props);
-
+      // delete comment from spot
       const deleteSong = async (id) => {
         const songs = playlist.value.songs.filter((song) => song.id != id)
         await updateDoc({
@@ -231,12 +227,12 @@
         })
       }
 
-
+      // create spot Url
       const spotUrl = computed(() => {
         return googleUrl + playlist.value.position.lat + ", " + playlist.value.position.lng
       })
 
-
+      // check if logged in user created the spot
       const ownership = computed(() => {
         return playlist.value && user.value && user.value.uid == playlist.value.userId
       })

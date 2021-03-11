@@ -1,5 +1,6 @@
 <template>
 
+<!-- Head section of User Profile -->
 <div class="user-header content mt-2 align-items-center">
 <div v-if="spots" class="user-top ">
   <div class="thumbnail">
@@ -13,18 +14,12 @@
     <p v-if="userInfo.sport" class="quad">{{userInfo.sport}}</p>
     <p v-else class="quad">User</p>
   </div>
-
-  
+</div>
 </div>
 
-
-
-</div>
-
-
+<!-- Userinfo -->
 <div class="profile-outer mt-3">
   <div class="content profile-inner pt-3">
-
     <div class="user-info">
       <div v-if="userInfo" class="card">
         <strong  class="quad">Userinfo</strong>
@@ -51,7 +46,7 @@
       </div>
     </div>
 
-
+<!-- All posted spots from user -->
     <div class="user-posts" v-if="spots">
       <div class="d-flex space-between">
         <h4>All spots from <span class="quad">{{userInfo.displayName}}</span> </h4>
@@ -96,7 +91,7 @@
     </div>
 
     
-
+<!-- Who to follow section -->
     <div class="user-posts mb-6">
         <h4>Who to <span class="quad">follow</span> </h4>
         <div v-if="userDocs">
@@ -145,7 +140,6 @@ components: {ListView, Profile},
 
 setup() {
 
-  
   const route = useRoute()
   console.log();
 
@@ -156,11 +150,6 @@ setup() {
     'playlists',
     ['userId', '==', route.params.id]
     )
-
-
-
-
-
 
   return {spots, userInfo, userDocs, route, user}
 }

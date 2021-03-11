@@ -1,14 +1,8 @@
 <template>
+
+<!-- All posts with category selector -->
   <div class="home pt-2 mb-8">
     <div v-if="error" class="error">Could not fetch the data</div>
-
-<!--
-    <div class="content">
-      <h4>Search for your spot</h4>
-      <input type="text" placeholder="search spot.." v-model="search">
-    </div>
--->
-
       <SelectCategory />
       <div v-if="spotList"> 
         <ListView :spots="spotList" />
@@ -36,24 +30,6 @@ export default {
   setup() {
     const search = ref("")
     const { error, documents: spotList } = getCollection('playlists')
-
-    
-
-   
-/*
-    const spotsWithSearch = 
-      computed(() => {
-        return spotList.value.filter((parameter) => parameter.title.toLowerCase().includes(search.value.toLowerCase()))
-    })
-*/
-  
-
-
-   
-
-    
-    
-
     
     return { error,  search,  spotList}
   }

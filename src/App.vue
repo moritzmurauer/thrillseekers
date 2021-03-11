@@ -17,7 +17,6 @@ export default {
 
   setup() {
     const route = useRoute()
-
     return {route}
   }
 

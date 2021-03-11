@@ -1,4 +1,4 @@
-# musoninjas
+# thrillseekers
 
 ## Project setup
 ```
