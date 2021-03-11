@@ -170,22 +170,17 @@
 </template>
 
 <script>
+
   import getUser from '@/composables/getUser'
   import getDocument from '@/composables/getDocument'
   import useLogout from '@/composables/useLogout'
-  import {
-    useRouter
-  } from 'vue-router'
-  import {
-    ref
-  } from 'vue'
+  import {useRouter} from 'vue-router'
+  import {ref} from 'vue'
 
   export default {
     setup() {
       const router = useRouter()
-      const {
-        logout
-      } = useLogout()
+      const {logout} = useLogout()
       const { user } = "" || getUser()
       const { document: userInfo } = getDocument('users', user.uid) || getDocument('users', user.uid)
       const toggleDropdown = ref(false)
