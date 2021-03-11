@@ -429,6 +429,10 @@
     grid-template-columns: 1fr 1fr;
     margin-bottom: 150px;
   }
+
+  .cover {
+    padding: 140px;
+  }
 }
 
 

@@ -1,5 +1,7 @@
 <template>
-    <form class="mt-4" @submit.prevent="handleSubmit">
+<div class="bg">
+<div class="background-cliff">
+    <form class="mt-4 formblock" @submit.prevent="handleSubmit">
 
       <h3>Sign up</h3>
       <input type="text" v-model="displayName" placeholder="Name">
@@ -10,7 +12,11 @@
 
       <button class="btn outline" v-if="!isPending">Sign up</button>
       <button v-if="isPending" disabled>Loading...</button>
+
+      <p class="mt-1 d-flex justify-content-center align-center">Already have an Account? Log in&nbsp;<router-link  :to="{ name: 'Login'}"><span class="underline-link">here</span> </router-link> </p>
   </form>
+   </div>
+  </div>
 </template>
 
 <script>
@@ -53,4 +59,33 @@ export default {
     .btn {
         width: 100%;
     }
+
+    .underline-link {
+        text-decoration: underline;
+    }
+
+  .formblock {
+    box-shadow: 4px 6px 4px 4px rgba(50, 50, 50, 0.2);
+}
+
+  .bg {
+  height: 100%;
+  position: relative;
+  }
+
+.background-cliff {
+  /* The image used */
+  position: absolute;
+  background-image: url("../../assets/imgs/drew-farwell-N4WBPmuxmBo-unsplash.jpg");
+
+  /* Full height */
+  height: 91vh;
+  width: 100%;
+  overflow: hidden;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>

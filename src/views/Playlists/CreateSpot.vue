@@ -40,7 +40,7 @@
   </div>
 
   <!-- form with all fields which require information about the spot -->
-    <form v-if="mapAdded" class="mt-2" @submit.prevent="handleSubmit">
+    <form v-if="mapAdded" class="mt-2 mb-8" @submit.prevent="handleSubmit">
         <h3>Add Infos to your spot!</h3>
         <hr class="mt-1 mb-2">
 
@@ -81,7 +81,7 @@
         <div class="error"></div>
 
         <!-- Submit and create spot -->
-        <button v-if="!isPending" class=" btn btn-create">Create</button>
+        <button v-if="!isPending" class=" btn btn-create">Add spot &#129305;</button>
         <button v-else disabled class="btn btn-create">Saving...</button>
     </form>
 </template>

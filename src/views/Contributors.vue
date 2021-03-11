@@ -1,8 +1,8 @@
 <template>
-  <div v-if="topList" class="content">
+  <div v-if="topList" class="content mb-8">
 
     <!-- A list of the top 10 contributors who posted the most spots yet -->
-    <div class="mt-3 d-flex space-between align-items-baseline ">
+    <div class="mt-3 d-flex contributers space-between align-items-baseline ">
       <h2>Top 10 <span class="secondary">contributors </span> </h2>
       <p>Number of added Spots</p>
     </div>
@@ -32,7 +32,7 @@
 
             </div>
 
-            <div class="chip ml-1 ">
+            <div class="chip visit ml-1 ">
               Visit Profile
             </div>
 
@@ -85,4 +85,18 @@
   .chip {
     width: 80px;
   }
+
+  @media only screen and (max-width: 800px) {
+     .visit {
+       display: none;
+     }
+
+     .grid {
+       grid-template-columns: 2fr 2fr;
+     }
+
+     .counter {
+       padding-right: 0;
+     }
+  } 
 </style>

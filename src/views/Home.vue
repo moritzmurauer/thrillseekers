@@ -188,10 +188,12 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 20px;
+    height: 100%;
   }
 
   .community {
     background: var(--secondary);
+    
   }
 
   .community img {
@@ -205,6 +207,7 @@ export default {
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    height: 100%;
   }
 
   .community-content {
@@ -251,6 +254,10 @@ export default {
   .community-content {
     width: 400px;
   }
+
+   .community {
+   margin-top: 200px;
+  }
   
 
 
@@ -274,6 +281,10 @@ export default {
 
   .community-content {
     width: 200px;
+  }
+
+   .community-inside {
+    padding: 140px 0;
   }
 } 
 

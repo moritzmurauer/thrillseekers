@@ -1,5 +1,5 @@
 <template>
-    <form class="mt-3" @submit.prevent="handleSubmit">
+    <form class="mt-3 mb-8" @submit.prevent="handleSubmit">
         <h3>Hey let the community know who you are!</h3>
 
         <div class="d-flex align-center">

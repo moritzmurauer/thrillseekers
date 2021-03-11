@@ -4,12 +4,13 @@
   <div class="home pt-2 mb-8">
     <div v-if="error" class="error">Could not fetch the data</div>
       <SelectCategory />
-      <div v-if="spotList"> 
+      <div  v-if="spotList"> 
         <ListView :spots="spotList" />
       </div>
       <div class="content" v-else>
         loading...
       </div>
+    
     </div>
 
  

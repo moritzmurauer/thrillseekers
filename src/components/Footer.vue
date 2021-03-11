@@ -9,19 +9,30 @@
             <div class="footer-sections">
                 <div>
                     <h4>Your Account</h4>
-                    <p>Log in</p>
-                    <p>Sign up</p>
+
+                    <div v-if="user">
+                        <router-link :to="{ name: 'UserProfile', params: {id: user.uid}}"><p>Profile</p></router-link>
+                        <router-link  :to="{ name: 'AddProfileInfo'}"><p>Update Info</p></router-link>
+                        <router-link  :to="{ name: 'CreateSpot'}"><p>Add Spot</p></router-link>
+                        CreateSpot
+                    </div>
+
+                    <div v-else>
+                        <router-link  :to="{ name: 'Login'}"><p>Log in</p></router-link>
+                        <router-link  :to="{ name: 'Signup'}"><p>Sign up</p></router-link>
+                    </div>
+                    
                 </div>
                 <div>
                     <h4>Legal</h4>
-                    <p>Impressum</p>
-                    <p>Cookies</p>
+                    <a href="#"><p>Impressum</p></a>
+                    <a href="#"><p>Cookies</p></a>
                 </div>
                 <div>
-                    <h4>Thrillseeker</h4>
-                    <p>Spots</p>
-                    <p>Events</p>
-                    <p>Community</p>
+                    <a href="#"><h4>Thrillseeker</h4></a>
+                    <router-link  :to="{ name: 'Posts'}"><p>Spots</p></router-link>
+                    <router-link  :to="{ name: 'Signup'}"><p>Events</p></router-link>
+                    <router-link  :to="{ name: 'Contributors'}"><p>Community</p></router-link>              
                 </div>
             </div>
 
@@ -116,6 +127,7 @@
      @media only screen and (max-width: 1200px) {
     footer {
       padding: 40px;
+      margin-top: 150px;
     }
 }
 </style>
