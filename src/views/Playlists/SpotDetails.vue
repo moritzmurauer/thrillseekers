@@ -206,17 +206,21 @@
          playlist = getDocument('playlists', props.id).document    
       }
 
+      
       // Delete (only for spot creator)
       const handleDelete = async () => {
-        await deleteDoc()
-        await deleteImage(playlist.value.filePath)
         await spotCounter({
-          addedSpots: userInfo.value.addedSpots - 1
+          addedSpots: userInfo.addedSpots - 1
         })
-        
         router.push({
           name: 'Posts'
         })
+        await deleteDoc()
+        await deleteImage(playlist.value.filePath)
+        
+        
+        
+        
       }
 
       // delete comment from spot
