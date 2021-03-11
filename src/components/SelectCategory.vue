@@ -1,33 +1,56 @@
 <template>
   <div class="categories content">
 
-        <router-link  :to="{ name: 'Posts'}"> 
-          <div class="chip">
-              All
+      
+      <!-- All Categories -->
+        <router-link  :to="{ name: 'Posts'}">
+          <div class="chip bottom">
+            <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-waterfall.png" alt="cliff icon">
+              <p>All</p>
+            </div>
           </div>
         </router-link>
 
+        <!-- Cliffs -->
          <router-link  :to="{ name: 'Category', params: {id: cliff}}"> 
-          <div class="chip">
-              {{cliff}}
+          <div class="chip bottom">
+            <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-cliff.png" alt="cliff icon">
+              <p>{{cliff}}</p>
+            </div>
           </div>
         </router-link>
 
+         <!-- Bridges -->
         <router-link  :to="{ name: 'Category', params: {id: bridge}}"> 
-          <div class="chip">
-              {{bridge}}
+          <div class="chip bottom">
+              <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-bridge.png" alt="cliff icon">
+              <p>{{bridge}}</p>
+            </div>
           </div>
         </router-link>
 
+
+       <!-- Swings -->
         <router-link  :to="{ name: 'Category', params: {id: swing}}"> 
-          <div class="chip">
-              {{swing}}
+          <div class="chip bottom">
+               <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-tire_swing.png" alt="cliff icon">
+              <p>{{swing}}</p>
+            </div>
           </div>
         </router-link>
 
+
+        <!-- Pools -->
         <router-link  :to="{ name: 'Category', params: {id: pool}}"> 
-          <div class="chip">
-              {{pool}}
+          <div class="chip bottom">
+              <div class="d-flex align-items-center">
+              <img class="icon" src="@/assets/imgs/icons/icons8-diving.png" alt="cliff icon">
+              <p>{{pool}}</p>
+            </div>
           </div>
         </router-link>
       </div>
@@ -53,8 +76,17 @@ export default {
         margin: 15px 0;
     }
 
+    .icon {
+      width: 20px;
+      margin-right: 5px;
+    }
+
     .categories .chip {
         margin-right: 15px;
+    }
+
+    .bottom {
+      margin-bottom: 100px;
     }
 
     a.router-link-exact-active .chip {

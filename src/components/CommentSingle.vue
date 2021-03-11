@@ -1,11 +1,12 @@
 <template>
+
+ <!-- Single Comment Component under Spot -->
   <div class="comment">
       <div class="comment-top">
             <router-link :to="{ name: 'UserProfile', params: {id: song.userId}}"><h4 class="quad">{{song.user}}</h4></router-link>
             <small class="quad ml-1">( {{ formatedTime }} )</small>
       </div>
-                <p class="mt-1">{{song.comment}}</p>
-                
+       <p class="mt-1">{{song.comment}}</p>             
 </div>
 </template>
 

@@ -3,6 +3,7 @@
   <div>
     <router-view :key="route.path"/>
   </div>
+
 </template>
 
 <script>
@@ -16,7 +17,6 @@ export default {
 
   setup() {
     const route = useRoute()
-
     return {route}
   }
 

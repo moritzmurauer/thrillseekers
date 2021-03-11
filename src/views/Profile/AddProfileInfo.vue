@@ -12,8 +12,9 @@
             <img class="avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl">
             <img class="avatar" v-if="!userInfo.avatarUrl" src="@/assets/default.png">
         </div>
+        
         </div>
-        <p class="error" v-if="fileError">{{fileError}}</p>
+        <p v-if="formError" class="error">{{formError}}</p>
         <small class="file-name" v-if="file">{{file.name}}</small>
 
         
@@ -32,7 +33,7 @@
 
         <div v-if="userInfo" class="field">
         <label for="home">Hometown:</label>
-        <input type="text" required placeholder="Where are you living?" v-model="userInfo.home">
+        <input type="text" placeholder="Where are you living?" v-model="userInfo.home">
         </div>
 
         <div v-if="userInfo" class="field">
@@ -70,7 +71,6 @@
     import useDocument from '@/composables/useDocument'
     import getUser from '@/composables/getUser'
     import getDocument from '@/composables/getDocument'
-    import {timestamp} from '@/firebase/config'
     import { useRouter } from 'vue-router'
     
 
@@ -82,6 +82,7 @@
             const {url, filePath, uploadProfilePicture} = useStorage()
             const {document: userInfo} = getDocument('users', user.value.uid)
             const {error, updateDoc} = useDocument('users', user.value.uid)
+            
             
             
             
@@ -97,11 +98,18 @@
             const file = ref(null)
             const fileError = ref(null)
             const isPending = ref(false)
+            var formError = ref(null)
             //const checkedCategory = ref([])
 
+
             const handleSubmit = async () => {
+                if (!file.value) {
+                    formError.value = "missing photo"
+                    return
+                }
                 if(file.value) {
                     isPending.value = true
+                    
                 await uploadProfilePicture(file.value)
                    const res =  await updateDoc({
                         bio: userInfo.value.bio,
@@ -113,6 +121,8 @@
                         avatarUrl: url.value,
                         filePath: filePath.value,
                     })
+
+                    console.log(res);
 
                     isPending.value = false
                     if(!error.value) {
@@ -130,6 +140,7 @@
 
             const handleChange = (event) => {
                 const selected = event.target.files[0]
+                formError.value = null
                 console.log(selected);
 
                 if (selected && types.includes(selected.type)) {
@@ -153,6 +164,7 @@
                 fileError,
                 isPending,
                 userInfo,
+                formError
             }
         }
     }

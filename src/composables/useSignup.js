@@ -8,7 +8,7 @@ const error = ref(null);
 const isPending = ref(false)
 
 
-
+// Create a new User and sign him up with the input he filled in
 const signup = async (email, password, displayName, bio, addedSpots) => {
   error.value = null
   isPending.value = true

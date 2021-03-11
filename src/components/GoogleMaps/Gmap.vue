@@ -7,6 +7,8 @@ import { ref, onMounted, watch } from "vue";
 
 export default {
   name: "GMap",
+
+  // predefining properties for map details
   props: {
     center: { lat: Number, lng: Number },
     zoom: Number,
@@ -49,18 +51,12 @@ export default {
      * this function is called as soon as the map is initialized
      */
     
-
     const clearMarkers = () => {
         currentMarkers.forEach(m => {
             m.map = null;
         })
         currentMarkers = []
     }
-
-
-    //calc bounds
-
-
 
 
     //load all markers
@@ -98,10 +94,9 @@ export default {
 
     };
 
-        //need to watch the properties
+   // need to watch the properties
     watch(
         () => props.markers,
-        
         () => {
             loadMapMarkers();
         }
@@ -110,7 +105,7 @@ export default {
     
 
 
-
+    // initialize map and load markers
     window.initMap = () => {
       map.value = new window.google.maps.Map(mapDivRef.value, {
         mapTypeId: props.mapType || "hybrid",
@@ -120,9 +115,6 @@ export default {
       });
 
       loadMapMarkers();
-
-      
-
       props.mapDidLoad && props.mapDidLoad(map, window.google.maps)
     }
 

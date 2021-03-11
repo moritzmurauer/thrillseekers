@@ -1,5 +1,7 @@
 <template>
 
+
+
   <div v-if="playlist" class="content">
     <div class="details-header  mt-3">
       <h2>{{ playlist.title }}</h2>
@@ -12,42 +14,56 @@
 
     <div class="d-flex space-between ">
       
+<!-- Likessystem -------------------------------------------------->
+      <div>
+        <div class="likes">
+          <div  class="secondary d-flex">
+
+            <div class="pr-1"><div></div> {{playlist.likes.length}} <small>liked this spot</small> </div>
+            <div v-if="user">
+                 <!-- Like -->
+                <i v-if="!playlist.likes.includes(user.uid)" @click="handleLikes" class="far fa-heart"></i>
+
+                <!-- unlike -->
+                <i v-if="playlist.likes.includes(user.uid)" @click="handleLikes" class="fas fa-heart secondary"></i> 
+            </div>
+
+            
+            </div>
+        </div>
+      </div>
+    
+<!---------------------------------------------------------------------------->
+
+      <!-- Author of the spot -------------------------------------------------->
       <router-link :to="{ name: 'UserProfile', params: {id: playlist.userId}}">
       <div class="added-by">
-        
-        <div v-if="playlist.avatarUrl">
+       
+        <div class="text-right">
+           <p>added by</p>
+           <p class="quad">{{ playlist.userName }}</p> 
+        </div>
+
+        <div class="ml-1">
+         <div v-if="playlist.avatarUrl">
           <img class="avatar mr-1" :src="playlist.avatarUrl">
         </div>
         <div v-else>
           <img class="avatar mr-1" src="@/assets/default.png">
         </div>
-        <div>
-          <p>added by</p>
-          
-           <p class="quad">{{ playlist.userName }}</p> 
         </div>
         
       </div>
       </router-link>
 
-      <div>
-        <div class="likes">
-          <p class="secondary"><i class="far fa-heart"></i> 0</p>
-        </div>
-      </div>
+
     </div>
-
-    
-
   </div>
 
   <div class="spot-outer">
   <div class="content mt-2 pt-3">
     <div class="error" v-if="error">{{ error }}</div>
     <div v-if="playlist" class="playlist-details">
-
-
-
 
       <!-- playlist information -->
       <div class="playlist-info">
@@ -56,33 +72,49 @@
         </div>
 
 
- 
-        
+      <div class="spot-infos">
         <h4 class="pt-2 mb-1">Details</h4>
         <p class="description">{{ playlist.description }}</p>
 
         <h4 class="pt-2 mb-1">Height:</h4>
         <p class="description">{{ playlist.height + " meters" }}</p>
+      </div>
+        
 
 
-
+      <div class="spot-infos">
        <h4 class="pt-2 mb-1">Commentsection</h4> 
-      <div v-if="!playlist.songs.length">No Comments yet</div>
+      <div class="mb-3" v-if="!playlist.songs.length">
+        <p>No Comments yet!</p> 
+      </div>
+      </div>
+
+      <!-- Commentsection -->
         <div v-for="song in playlist.songs" class="card card-comment mt-1" :key="song.id">
           <CommentSingle v-if="song" :song="song" />
           <button class="btn-delete" @click="deleteSong(song.id)" v-if="ownership">delete</button>
         </div>
+
         <AddComment v-if="user" :playlist="playlist" />
+
+        <div class="mb-3 card p-2" v-if="!user">
+          <h4 class=" mb-1">Send with us &#129305;</h4>
+          <p>Post your own spots and become a part of the community!</p>
+          <router-link :to="{ name: 'Signup'}"> <button class="btn"> Sign up </button></router-link>
+        </div>
       </div>
 
-      <!-- song list -->
-      <div class="song-list">
+      
+
+      <!-- Location and Map of spot -->
+      <div class="map-card">
+        <a target="_blank" :href="spotUrl">
         <div class="card p-1">
           <div class="map-location">
             <i class="fas fa-map-marker-alt"></i>
-            <a target="_blank" :href="spotUrl">    
+                
             <p class="pb-2">{{ playlist.location }}</p>
-        </a>
+        
         </div>
 
         <Gmap :disableUI="false" :zoom="8" mapType="roadmap" :center="playlist.position"
@@ -92,6 +124,7 @@
        
         
         </div>
+      </a>
       </div>
        <button class="btn warningbtn mb-1" v-if="ownership" @click="handleDelete">Delete Spot</button>
     </div>
@@ -104,6 +137,7 @@
      <PostsHome :posts="spotsLimited" />
 
     </div>
+    
   </div>
 </template>
 
@@ -113,6 +147,7 @@
   import useDocument from '@/composables/useDocument'
   import getDocument from '@/composables/getDocument'
   import getUser from '@/composables/getUser'
+  import Footer from '@/components/Footer.vue'
   import CommentSingle from '@/components/CommentSingle.vue'
   import AddComment from '@/components/AddComment.vue'
   import {computed,ref} from 'vue'
@@ -126,7 +161,8 @@
       AddComment,
       Gmap,
       CommentSingle,
-      PostsHome
+      PostsHome,
+      Footer
     },
 
     setup(props) {
@@ -135,29 +171,42 @@
       'playlists', 4
       )
 
+      // gets Spot by ID
       const router = useRouter()
-      const {document: playlist,error} = 
+      let {document: playlist,error} = 
         getDocument('playlists', props.id)
 
       const {user} = getUser()
 
 
-      const {updateDoc: spotCounter } = useDocument('users', user.value.uid)
-      const {document: userInfo} = getDocument('users', user.value.uid)
+      const {updateDoc: spotCounter } = useDocument('users', user.uid)
+      const {document: userInfo} = getDocument('users', user.uid)
       const {deleteDoc, updateDoc} = useDocument('playlists', props.id)
-
       const {deleteImage} = useStorage()
 
+      // base for google Url 
       const googleUrl = 'https://www.google.com/maps/search/?api=1&query='
 
-      
+      // Like and unlike
+      const handleLikes = async () => {
+        const userLiked = playlist.value.likes.includes(user.value.uid)
+        if (!userLiked) {
+          const newLike = user.value.uid
+          await updateDoc({
+          likes: [...playlist.value.likes, newLike]
+         })
+        } else {
+            const likedIndex = playlist.value.likes.indexOf(user.value.uid)
+            const likes = playlist.value.likes
+            const newLikes = likes.splice(likedIndex, 1)
+            await updateDoc({
+            likes
+         })
+        }  
+         playlist = getDocument('playlists', props.id).document    
+      }
 
-
-
-
-
-
-
+      // Delete (only for spot creator)
       const handleDelete = async () => {
         await deleteDoc()
         await deleteImage(playlist.value.filePath)
@@ -170,8 +219,7 @@
         })
       }
 
-      console.log(props);
-
+      // delete comment from spot
       const deleteSong = async (id) => {
         const songs = playlist.value.songs.filter((song) => song.id != id)
         await updateDoc({
@@ -179,12 +227,12 @@
         })
       }
 
-
+      // create spot Url
       const spotUrl = computed(() => {
         return googleUrl + playlist.value.position.lat + ", " + playlist.value.position.lng
       })
 
-
+      // check if logged in user created the spot
       const ownership = computed(() => {
         return playlist.value && user.value && user.value.uid == playlist.value.userId
       })
@@ -202,7 +250,8 @@
         user,
         spotUrl,
         spotsLimited,
-        userInfo
+        userInfo,
+        handleLikes
       }
 
 
@@ -247,6 +296,14 @@
     cursor: pointer;
   }
 
+  .fa-heart {
+    cursor: pointer;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
   .details-header {
     display: flex;
   }
@@ -254,6 +311,8 @@
   .spot-outer {
     background-color: var(--secondary)
   }
+
+  
 
   .playlist-details {
     display: grid;
@@ -275,7 +334,7 @@
     overflow: hidden;
     border-radius: 5px;
     position: relative;
-    padding: 160px;
+    padding: 200px;
   }
 
   .cover img {
@@ -283,10 +342,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 120%;
-    max-height: 120%;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 400px;
   }
 
   
@@ -295,6 +354,10 @@
     text-transform: capitalize;
     font-size: 28px;
     margin-top: 20px;
+  }
+
+  .playlist-info p {
+    line-height: 1.6rem;
   }
 
   .playlist-info p {
@@ -335,6 +398,7 @@
   .avatar {
     width: 50px;
     height: 50px;
+    box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.2);
   }
 
   .likes {
@@ -358,6 +422,35 @@
 .map-location i {
   font-size: 1.7rem;
   padding: 10px 0;
+}
+
+@media only screen and (max-width: 800px) {
+  .more-spots {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 150px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+ .playlist-details {
+    display: block;
+  }
+
+  .cover {
+    max-width: 90%;
+  }
+
+  .spot-infos {
+    padding: 0 20px;
+  }
+
+
+  .map-card {
+    margin-top: 50px;
+  }
 }
   
 </style>

@@ -4,7 +4,7 @@
 
     <h4 class="mb-1">Where is the spot you wanna submit?</h4>
 
-
+    <!-- Google Map Component -->
     <Gmap class="mb-1"
         :disableUI="false" 
         :zoom="zoomNum" 
@@ -14,58 +14,52 @@
         :mapDidLoad="handleMapDidLoad">  
     </Gmap>
 
-
+    <!-- Input Field to search Location -->
     <input class="searchfield" type="text" v-model="location" placeholder="enter Location...">
 
+    <!-- Error Output -->
     <small class="error ml-1 " v-if="mapError">{{mapError}}</small>
     
-    <div class="d-flex">
+    <!-- Start searching Input -->
+    <div class="d-flex wrap">
         <div>
-    <button class="btn-orange mt-1" @click="findLocation">
-      Search location
-    </button>
+            <button class="ml-8 pl-4 pr-4 btn-orange info-button mt-1" @click="findLocation">
+             Search location
+             <i class="white fas fa-map-marker-alt"></i>
+            </button>
+         </div>
 
-    
-    </div>
-
-
+    <!-- If search succesful show address and continue button -->
     <div v-if="locResult">
-        <button class="mt-1 ml-3 btn" @click="submitForm">Add Infos -> -> -></button>
-      
-      
+        <button class="mt-1 pl-4 pr-4 ml-2 btn" @click="submitForm">
+            Add Infos 
+            <i class="white fas fa-arrow-circle-right"></i> 
+        </button> 
+     </div>
     </div>
-</div>
-
   </div>
 
-  <!-- form -->
-   
+  <!-- form with all fields which require information about the spot -->
     <form v-if="mapAdded" class="mt-2" @submit.prevent="handleSubmit">
         <h3>Add Infos to your spot!</h3>
         <hr class="mt-1 mb-2">
 
-        
         <h4 class="mb-1 mt-1">Location: </h4>
-
         <input type="text" requires   v-model="locResult.address">
-
         <input type="text" requires placeholder="Name of the spot" v-model="title">
         <input type="number" requires placeholder="Maximum height" v-model="height">
         <textarea v-model="description" placeholder="Say a few words about the spot!"></textarea>
         
-
-
-        <!-- category -->
-
+        <!-- select category -->
         <div  class="field mt-2 mb-2">
             <h4>Please select a category</h4>
-  <select class="mb-1 mt-1 pl-3 p-3 pt-1 pb-1" v-model="selected">
-    <option selected="category?" class="p-3" v-for="option in options" :key="option.value">
-      {{ option.text }}
-    </option>
-  </select>
-  <p>Category: {{ selected }}</p>
-</div>
+            <select class="mb-1 mt-1 pl-3 p-3 pt-1 pb-1" v-model="selected">
+                <option selected="category?" class="p-3" v-for="option in options" :key="option.value">
+                 {{ option.text }}
+                 </option>
+            </select>
+            <p>Category: {{ selected }}</p>
+        </div>
 
 
 
@@ -86,6 +80,7 @@
 
         <div class="error"></div>
 
+        <!-- Submit and create spot -->
         <button v-if="!isPending" class=" btn btn-create">Create</button>
         <button v-else disabled class="btn btn-create">Saving...</button>
     </form>
@@ -144,7 +139,7 @@
 
            
 
-           //finds lat, lng information basen on adress
+      //finds lat, lng information basen on adress
       const findLocation = () => {
 
         geoCoderService.geocode({
@@ -177,9 +172,8 @@
           })
       }
 
+    // adds marker based on search results on map
       const addLocation = (location) => {
-
-        
         markers.value = [...markers.value, {
           ...location.position,
           title: `<strong>${location.address}</strong>`
@@ -187,25 +181,23 @@
 
       };
 
+
+    // submits location information
       const submitForm = () => {
          mapAdded.value = true,
          mapComplete.value = true 
-        console.log(locResult.value.position.lat);
-        console.log(locResult.value.position.lng);
-        console.log(locResult.value.position);
-        console.log(locResult.value.address);
       }
 
 
-
+     // Reloads map with new Markers and enables Geocode services
       const handleMapDidLoad = (map, GServices) => {
         console.log("handle  map did load");
         console.log("map", map.mapUrl);
         console.log("Gservices", GServices);
-        
         geoCoderService = new GServices.Geocoder();
-        
       }
+
+      // Defines possible Category Inputs
             const options= ref([
                 { text: 'Cliff', value: 'A' },
                 { text: 'Bridge', value: 'B' },
@@ -214,9 +206,9 @@
                 ])
 
             const selected = ref('')
-            //const checkedCategory = ref([])
             
-
+            
+            // Submits all filled in information to database and creates new spot and redirectes to it
             const handleSubmit = async () => {
                 if(file.value) {
                     isPending.value = true
@@ -238,20 +230,10 @@
                         createdAt: timestamp()
                     })
 
+                    // Counter for new added spots
                     await updateDoc({
                         addedSpots: userInfo.value.addedSpots + 1
                     })
-
-                    // const newSpot = {
-                    //    spotId: res.id,
-                    //    spotName: res.title
-                    // }
-
-                    // await updateDoc({
-                    //     addedSpots: [...docRef, newSpot]
-                    // })
-
-                    
 
                     isPending.value = false
                     if(!error.value) {
@@ -265,9 +247,9 @@
             
 
             //allowed file types
-
             const types = ['image/png', 'image/jpeg']
 
+            // Uploads image of spot
             const handleChange = (event) => {
                 const selected = event.target.files[0]
                 console.log(selected);
@@ -393,4 +375,30 @@
 .btn-create {
         margin: 0;
 }
+
+textarea {
+    line-height: 1.4rem;
+}
+
+.btn {
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .mapcontent {
+    padding: 20px;
+    }
+
+    .wrap {
+        flex-wrap: wrap;
+    }
+
+    .info-button {
+        margin-left: 32px;
+    }
+    
+}
+
+
 </style>

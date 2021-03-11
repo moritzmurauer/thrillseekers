@@ -1,4 +1,6 @@
 <template>
+
+  <!-- List of all User -->
   <div v-for="user in users" :key="user.id" class="card">
         <router-link :to="{ name: 'UserProfile', params: {id: user.id}}">
         <div class="userAtts">

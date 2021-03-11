@@ -4,6 +4,8 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
 
+
+// API Key to communicate with Firebase Backend
 const firebaseConfig = {
   apiKey: "AIzaSyC1yECJHk5Ad8pPycv9FbDV1KJclI47nJs",
   authDomain: "spa-thrillseeker.firebaseapp.com",
@@ -13,7 +15,7 @@ const firebaseConfig = {
   appId: "1:572026772824:web:af09ddb2e020f682e0192d"
 };
 
-
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
 //init services

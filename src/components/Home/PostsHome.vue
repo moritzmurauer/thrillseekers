@@ -1,6 +1,4 @@
 <template>
-
-  
   <div v-for="post in posts" :key="post.id">
      <SinglePost :post="post" />
   </div>
@@ -13,9 +11,6 @@ import SinglePost from '@/components/Home/SinglePost'
 export default {
   props: ['posts'],
   components: {SinglePost},
-
-  setup () {  
-  }
 }
 
 </script>

@@ -1,6 +1,8 @@
 <template>
-  <div class="content" v-for="spot in spots" :key="spot.id">
 
+  <!-- A list of all spots in the collection -->
+  
+  <div class="content" v-for="spot in spots" :key="spot.id">
      <router-link :to="{name: 'SpotDetails', params: {id: spot.id}}">
       <div class="single">
         <div class="thumbnail">
@@ -13,7 +15,7 @@
           </div>
 
 
-<div class="d-flex align-items-center">
+  <div class="d-flex align-items-center">
       <div class="avatar-icon">
         <div v-if="spot.avatarUrl">
           <img class="avatar mr-1" :src="spot.avatarUrl">
@@ -30,6 +32,12 @@
             </div>
           </div>
   </div>
+
+  <div class="like-block mt-1">
+    {{spot.likes.length}}
+    <i class="far fa-heart"></i>
+  </div>
+
 
         </div>
         
@@ -52,8 +60,9 @@ export default {
 
     
 
-      .single {
+    .single {
     display: flex;
+    position: relative;
     align-items: center;
     border-radius: 10px;
     background: var(--secondary);
@@ -88,4 +97,28 @@ export default {
     width: 30px;
     height: 30px;
   }
+
+ 
+
+  .like-block {
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    color: var(--third);
+  }
+
+
+
+ @media only screen and (max-width: 700px) {
+    h3 {
+      font-size: 1rem;
+    }
+
+    p {
+       font-size: 0.8rem;
+    }
+    
+  }
+
+ 
 </style>

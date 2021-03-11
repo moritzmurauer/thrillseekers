@@ -1,5 +1,6 @@
 <template>
 
+<!-- Head section of User Profile -->
 <div class="user-header content mt-2 align-items-center">
 <div v-if="spots" class="user-top ">
   <div class="thumbnail">
@@ -7,21 +8,18 @@
             <img class="avatar avatar-profile" v-if="!userInfo.avatarUrl" src="@/assets/default.png">
   </div>
   <div class="user-info ml-2">
+   
     <h2 class="mb-1">{{userInfo.displayName}}</h2>
     <p class="mb-1"><strong>{{spots.length}}</strong> added Spots</p>
     <p v-if="userInfo.sport" class="quad">{{userInfo.sport}}</p>
     <p v-else class="quad">User</p>
   </div>
 </div>
-
-
-
 </div>
 
-
+<!-- Userinfo -->
 <div class="profile-outer mt-3">
   <div class="content profile-inner pt-3">
-
     <div class="user-info">
       <div v-if="userInfo" class="card">
         <strong  class="quad">Userinfo</strong>
@@ -48,7 +46,7 @@
       </div>
     </div>
 
-
+<!-- All posted spots from user -->
     <div class="user-posts" v-if="spots">
       <div class="d-flex space-between">
         <h4>All spots from <span class="quad">{{userInfo.displayName}}</span> </h4>
@@ -76,7 +74,7 @@
 
           <div class="d-flex">
          <p>Added by {{spot.userName}}</p>
-            <div v-if="spots" class="spot-avatar">
+            <div v-if="userInfo" class="spot-avatar">
             <img class="avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl">
             <img class="avatar" v-if="!userInfo.avatarUrl" src="@/assets/default.png">
         </div>
@@ -92,12 +90,14 @@
 
     </div>
 
-    <div class="user-posts">
+    
+<!-- Who to follow section -->
+    <div class="user-posts mb-6">
         <h4>Who to <span class="quad">follow</span> </h4>
         <div v-if="userDocs">
         <div class="d-flex user-single align-center card card-user" v-for="userDoc in userDocs" :key="userDoc.id">
           
-          <div class="pr-1">
+          <div v-if="userDocs.length" class="pr-1">
           <img class="avatar avatar-user" v-if="userDoc.avatarUrl" :src="userDoc.avatarUrl">
           <img class="avatar avatar-user" v-if="!userDoc.avatarUrl" src="@/assets/default.png">
           </div>
@@ -111,6 +111,10 @@
       </div>
       
     </div>
+
+   
+
+    
   </div>
 </div>
 
@@ -130,14 +134,12 @@ import getDocument from '@/composables/getDocument'
 import ListView from '@/components/ListView.vue'
 import Profile from '@/components/Profile.vue'
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
 export default {
 
 components: {ListView, Profile},
 
 setup() {
 
-  
   const route = useRoute()
   console.log();
 
@@ -148,11 +150,6 @@ setup() {
     'playlists',
     ['userId', '==', route.params.id]
     )
-
-
-
-
-
 
   return {spots, userInfo, userDocs, route, user}
 }
@@ -268,4 +265,20 @@ setup() {
   .user-link {
     margin-top: 8px;
   }
+
+@media only screen and (max-width: 1050px) {
+ .profile-inner{
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+  }
+
+
+  @media only screen and (max-width: 800px) {
+ .profile-inner{
+    display: block;
+  }
+  }
+
+
+
 </style>

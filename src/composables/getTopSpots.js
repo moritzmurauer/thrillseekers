@@ -2,20 +2,18 @@ import { ref, watchEffect } from 'vue';
 import { projectFirestore } from '../firebase/config';
 
 
-const getLimitedCollection = (collection, limit) => {
+const getTopSpots = (limit) => {
 
     const documents = ref(null)
     const error = ref(null)
 
 
-    // Saving selected Collection and limiting output
-    let collectionRef = projectFirestore.collection(collection)
+    
+    let collectionRef = projectFirestore.collection("playlists")
+    .orderBy("likes", "desc").limit(limit)
 
-    if(limit) {
-        collectionRef = collectionRef.limit(limit)
-    }
 
-  // Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
+// Creating Realtime Eventlistener to track changes but also unsubing it after action save costs and optimize performance
   const unsub = collectionRef.onSnapshot((snap) => {
         console.log('snapshot');
         let results = []
@@ -43,4 +41,4 @@ const getLimitedCollection = (collection, limit) => {
 }
 
 
-export default getLimitedCollection
+export default getTopSpots

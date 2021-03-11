@@ -3,7 +3,7 @@ import { projectAuth } from '../firebase/config';
 
 const user = ref(projectAuth.currentUser)
 
-
+// get User which is currently logged in
 projectAuth.onAuthStateChanged(_user => {
     user.value = _user
 })

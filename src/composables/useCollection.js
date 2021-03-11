@@ -6,6 +6,8 @@ const useCollection = (collection) => {
     const error = ref(null)
     const isPending = ref(false)
 
+
+    // Add new Collection to the Database
     const addDoc = async (doc) => {
         error.value = null
         isPending.value = true
